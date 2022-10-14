@@ -54,19 +54,18 @@ public class EmployeeService {
 
 		double paybleSal = calcEffectivSalary(e.getDOJ(), e.getSalary());
 
-		if (paybleSal >= 250000) {
-			tax = 0;
+		if(paybleSal<=250000) {
+			tax=0;
+		}			
+		else if(paybleSal<=500000) {
+			tax=0.05*(paybleSal-250000);
 		}
-		if (paybleSal >= 250000 && paybleSal <= 500000) {
-			tax = tax + (500000 - paybleSal)*0.05 ;
+		else if(paybleSal<=1000000) {
+			tax=(0.1*(paybleSal-500000))+(0.05*250000);
 		}
-		if (paybleSal >= 500000 && paybleSal <= 1000000) {
-			tax = tax + (1000000 - paybleSal)*0.1 ;
+		else {
+			tax=(0.2*(paybleSal-1000000))+(0.1*500000)+(0.05*250000);
 		}
-		if (paybleSal >= 1000000) {
-			tax = tax + (paybleSal - 1000000) * 0.2;
-		}
-
 		if (paybleSal >= 2500000) {
 			cessAmount = paybleSal * 0.02;
 		}
